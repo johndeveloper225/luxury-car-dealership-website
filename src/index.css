@@ -1,0 +1,173 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Cormorant Garamond", "Times New Roman", serif;
+  --font-sans: "Outfit", "Segoe UI", sans-serif;
+  --color-ink: #0c0b0a;
+  --color-charcoal: #141311;
+  --color-graphite: #1e1c19;
+  --color-ivory: #f3efe7;
+  --color-paper: #f7f4ee;
+  --color-sand: #e6e0d4;
+  --color-gold: #d4bc8a;
+  --color-bronze: #8a6a3b;
+  --color-stone: #8a847a;
+  --color-ash: #5e584f;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  overflow-x: clip;
+  background: var(--color-ivory);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-weight: 300;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: #c6a36a;
+  color: #0c0b0a;
+}
+
+:focus-visible {
+  outline: 1px solid #c6a36a;
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  z-index: 80;
+  background: var(--color-ivory);
+  color: var(--color-ink);
+  padding: 0.75rem 1rem;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 0.85s ease,
+    transform 0.85s ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+.scroll-line {
+  transform-origin: top;
+  animation: scroll-line 2.6s ease-in-out infinite;
+}
+
+@keyframes scroll-line {
+  0% {
+    transform: scaleY(0);
+    transform-origin: top;
+  }
+  45% {
+    transform: scaleY(1);
+    transform-origin: top;
+  }
+  55% {
+    transform: scaleY(1);
+    transform-origin: bottom;
+  }
+  100% {
+    transform: scaleY(0);
+    transform-origin: bottom;
+  }
+}
+
+.frame-in {
+  animation: frame-in 0.45s ease;
+}
+
+@keyframes frame-in {
+  from {
+    opacity: 0.45;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.lightbox-in {
+  animation: lightbox-in 0.35s ease;
+}
+
+@keyframes lightbox-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.field {
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid rgba(12, 11, 10, 0.2);
+  border-radius: 0;
+  background: transparent;
+  padding: 0.85rem 0;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 300;
+  color: var(--color-ink);
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.field:focus {
+  border-bottom-color: var(--color-bronze);
+  outline: none;
+}
+
+select.field {
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, #8a6a3b 50%),
+    linear-gradient(135deg, #8a6a3b 50%, transparent 50%);
+  background-position:
+    calc(100% - 14px) 50%,
+    calc(100% - 9px) 50%;
+  background-size:
+    5px 5px,
+    5px 5px;
+  background-repeat: no-repeat;
+  padding-right: 1.5rem;
+}
+
+textarea.field {
+  resize: vertical;
+  min-height: 8.5rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal,
+  .scroll-line,
+  .frame-in,
+  .lightbox-in {
+    animation: none;
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
